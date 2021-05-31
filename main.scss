@@ -1,0 +1,21 @@
+
+
+body {
+    --accent-color: #4455ff;
+    --radius: 5px;
+    background: hsl(0, 0%, 96%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content{
+    font-family: 'Fira Sans', sans-serif;
+    max-width: 500px;
+    width: 90%;
+}
+
+@import 'test-taker-details/test-taker-details.scss';
+@import 'test-taker-preview/test-taker-preview.scss';
+@import 'list/list.scss';
+@import 'page/page.scss';

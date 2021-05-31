@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.html",
   "scripts": {
+    "scss": "sass main.scss:main.css",
+    "build": "npm run scss",
     "start": "npx http-server"
   },
   "repository": {
@@ -20,6 +22,7 @@
     "eslint": "^7.27.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.3",
-    "http-server": "^0.12.3"
+    "http-server": "^0.12.3",
+    "sass": "^1.34.0"
   }
 }

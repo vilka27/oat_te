@@ -28,14 +28,16 @@ function createElement(
     element.setAttribute(...entry);
   });
 
-  children.forEach((child) => {
-    if (isNode(child)) {
-      element.appendChild(child);
-    } else {
-      const node = document.createTextNode(child.toString());
-      element.appendChild(node);
-    }
-  });
+  children
+    .filter((child) => child !== undefined && child !== null)
+    .forEach((child) => {
+      if (isNode(child)) {
+        element.appendChild(child);
+      } else {
+        const node = document.createTextNode(child.toString());
+        element.appendChild(node);
+      }
+    });
 
   Object.entries(eventListeners).forEach((entry) => {
     element.addEventListener(...entry);
@@ -60,7 +62,7 @@ function elementCreator(tag) {
   return createTagElement;
 }
 
-const tags = ['div', 'span', 'ul', 'li', 'button'];
+const tags = ['div', 'span', 'ul', 'li', 'button', 'nav'];
 const entries = tags.map((tagName) => [tagName, elementCreator(tagName)]);
 const T = Object.fromEntries(entries);
 export default T;

@@ -1,0 +1,19 @@
+.page{
+    &__navigation{
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    &__prev, 
+    &__next{
+        padding: 10px;
+        border-radius: var(--radius);
+        background: var(--accent-color);
+        border: 0px;
+        outline: none;
+        color: white;
+        flex: 1;
+        cursor: pointer;
+    }
+}

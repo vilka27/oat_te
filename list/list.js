@@ -6,9 +6,11 @@ import T from '../T.js';
  * @param {Function} renderer Receives single data entity from datalist and returns Element
  * @returns {Element}
  */
-function list(attributes, dataList, renderer) {
+function list(dataList, renderer) {
   const children = renderer ? dataList.map(renderer) : [];
-  return T.ul(attributes, children);
+  const items = children.map((childElem) => T.li({ class: 'list__item' }, [childElem]));
+
+  return T.ul({ class: 'list' }, items);
 }
 
 export default list;

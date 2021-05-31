@@ -1,0 +1,8 @@
+.test-taker-details{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+    &__field-name{
+        color: gray
+    }
+}
