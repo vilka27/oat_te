@@ -8,4 +8,8 @@
         border-radius: var(--radius);
         list-style-type: none;
     }
+    &__no-items-message{
+        font-size: 1.5em;
+        padding: 20px;
+    }
 }

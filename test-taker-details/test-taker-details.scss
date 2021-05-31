@@ -1,6 +1,7 @@
 .test-taker-details{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 120px 1fr;
+    font-size: 18px;
     
     &__field-name{
         color: gray
@@ -9,5 +10,21 @@
     &__last-name,
     &__first-name{
         text-transform: capitalize;
+    }
+    &__password {
+        font-size: 0;
+
+        &:hover {
+            font-size: 18px;
+            &:before{
+                content:''
+            }
+        }
+
+        &:before {
+            content: 'Hover to reveal';
+            font-size: 18px;
+            color: var(--accent-color);
+        }
     }
 }

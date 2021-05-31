@@ -15,13 +15,28 @@ body {
 
 .test-taker-details {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 120px 1fr;
+  font-size: 18px;
 }
 .test-taker-details__field-name {
   color: gray;
 }
 .test-taker-details__last-name, .test-taker-details__first-name {
   text-transform: capitalize;
+}
+.test-taker-details__password {
+  font-size: 0;
+}
+.test-taker-details__password:hover {
+  font-size: 18px;
+}
+.test-taker-details__password:hover:before {
+  content: "";
+}
+.test-taker-details__password:before {
+  content: "Hover to reveal";
+  font-size: 18px;
+  color: var(--accent-color);
 }
 
 @keyframes side {
@@ -62,11 +77,12 @@ body {
 .test-taker-preview__id:before {
   content: "#";
 }
-.test-taker-preview__name, .test-taker-preview__name {
+.test-taker-preview__name {
   grid-area: name;
   font-size: 36px;
   text-transform: capitalize;
   display: inline-block;
+  align-self: end;
 }
 .test-taker-preview__details {
   grid-area: details;
@@ -123,6 +139,10 @@ body {
   padding: 20px;
   border-radius: var(--radius);
   list-style-type: none;
+}
+.list__no-items-message {
+  font-size: 1.5em;
+  padding: 20px;
 }
 
 .page__navigation {

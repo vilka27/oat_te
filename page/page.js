@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import list from '../list/list.js';
-import fetchData from '../fetchData.js';
+import fetchData from '../utils/fetchData.js';
 import T from '../T.js';
 /**
  *
@@ -22,27 +22,21 @@ export default function page(usersUrl, perPage = 20, itemRenderer, responseToMod
     const prevButton = offset >= perPage ? T.button(
       { class: 'page__prev' },
       ['< Previous'],
-      {
-        click: () => {
-          loadPrev();
-        },
-      },
+      { click: loadPrev },
     ) : null;
 
-    const showNext = totalItems === undefined || offset + perPage <= totalItems;
+    const showNext = totalItems === undefined || offset + perPage < totalItems;
 
     const nextButton = showNext ? T.button(
-      { class: 'page__next' }, ['Next >'], {
-        click: () => {
-          loadNext();
-        },
-      },
+      { class: 'page__next' },
+      ['Next >'],
+      { click: loadNext },
     ) : null;
 
     return T.div(
       { class: 'page' },
       [
-        list(listData, itemRenderer),
+        list(listData, itemRenderer, 'Ooops no more items left, click "Previous"'),
         T.nav({ class: 'page__navigation' }, [prevButton, nextButton]),
       ],
     );
@@ -60,26 +54,31 @@ export default function page(usersUrl, perPage = 20, itemRenderer, responseToMod
   /**
    * Fetch new data and update page
    */
-  function fetchListData() {
-    fetchData(usersUrl, { limit: perPage, offset })
+  function fetchListData(newOffset) {
+    fetchData(usersUrl, { limit: perPage, offset: newOffset })
       .then(responseToModel)
       .then((listData) => {
-        if (listData.length < perPage) {
-          totalItems = offset + listData.length;
+        if (!listData) {
+          throw (new Error('Something went wrong during fetch'));
         }
+        if (listData.length < perPage) {
+          totalItems = newOffset + listData.length;
+        }
+        offset = newOffset;
         renderPage(listData);
+      })
+      .catch((reason) => {
+        console.log(reason);
       });
   }
 
   function loadNext() {
-    offset += perPage;
-    fetchListData();
+    fetchListData(offset + perPage);
   }
   function loadPrev() {
-    offset -= perPage;
-    fetchListData();
+    fetchListData(offset - perPage);
   }
 
-  fetchListData();
+  fetchListData(offset);
   return mainElement;
 }

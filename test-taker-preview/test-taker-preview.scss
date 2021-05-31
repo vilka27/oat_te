@@ -40,11 +40,12 @@
             content: '#'
         }
     }
-    &__name, &__name{
+    &__name{
         grid-area: name;
         font-size: 36px;
         text-transform: capitalize;
         display: inline-block;
+        align-self: end;
     }
     &__details{
         grid-area: details;

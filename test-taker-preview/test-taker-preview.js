@@ -48,6 +48,9 @@ function loadDetails(userId, detailsBox, url, responseToModel = (r) => r, pictur
       if (response.picture) {
         changePicture(response.picture, pictureBox);
       }
+    })
+    .catch((reason) => {
+      console.log(reason);
     });
 }
 
