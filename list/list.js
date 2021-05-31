@@ -1,7 +1,6 @@
 import T from '../T.js';
 /**
  *
- * @param {Object} attributes
  * @param {Array} dataList
  * @param {Function} renderer Receives single data entity from datalist and returns Element
  * @returns {Element}

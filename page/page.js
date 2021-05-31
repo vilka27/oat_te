@@ -1,18 +1,35 @@
+/* eslint-disable no-use-before-define */
 import list from '../list/list.js';
+import fetchData from '../fetchData.js';
 import T from '../T.js';
-
-export default function page(usersUrl, perPage = 20, itemRenderer) {
+/**
+ *
+ * @param {String} usersUrl
+ * @param {Number} perPage
+ * @param {Function} itemRenderer
+ * @param {Function} responseToModel
+ * @returns {Element}
+ */
+export default function page(usersUrl, perPage = 20, itemRenderer, responseToModel = (r) => r) {
   let offset = 0;
   let totalItems;
+  /**
+   *
+   * @param {Array} listData
+   * @returns {Element}
+   */
   function pageInner(listData) {
-    const prevButton = offset >= perPage ? T.button({ class: 'page__prev' }, ['< Previous'], {
-      click: () => {
-        loadPrev();
+    const prevButton = offset >= perPage ? T.button(
+      { class: 'page__prev' },
+      ['< Previous'],
+      {
+        click: () => {
+          loadPrev();
+        },
       },
-    }) : null;
+    ) : null;
 
-    const showNext = totalItems === undefined
-                || offset + perPage <= totalItems;
+    const showNext = totalItems === undefined || offset + perPage <= totalItems;
 
     const nextButton = showNext ? T.button(
       { class: 'page__next' }, ['Next >'], {
@@ -31,32 +48,38 @@ export default function page(usersUrl, perPage = 20, itemRenderer) {
     );
   }
   const mainElement = T.div({}, [pageInner([])]);
+
+  /**
+   *
+   * @param {Array} listData
+   */
   function renderPage(listData) {
     mainElement.innerHTML = '';
     mainElement.appendChild(pageInner(listData));
   }
-  function updateTestTakersList() {
-    const url = new URL(usersUrl);
-    const params = { perPage, offset };
-    Object.keys(params).forEach((key) => url.searchParams.append(key, params[key]));
-    fetch(url)
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.length < perPage) {
-          totalItems = offset + response.length;
+  /**
+   * Fetch new data and update page
+   */
+  function fetchListData() {
+    fetchData(usersUrl, { limit: perPage, offset })
+      .then(responseToModel)
+      .then((listData) => {
+        if (listData.length < perPage) {
+          totalItems = offset + listData.length;
         }
-        renderPage(response);
+        renderPage(listData);
       });
   }
+
   function loadNext() {
     offset += perPage;
-    updateTestTakersList();
+    fetchListData();
   }
   function loadPrev() {
     offset -= perPage;
-    updateTestTakersList();
+    fetchListData();
   }
 
-  updateTestTakersList();
+  fetchListData();
   return mainElement;
 }

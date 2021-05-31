@@ -62,7 +62,7 @@ function elementCreator(tag) {
   return createTagElement;
 }
 
-const tags = ['div', 'span', 'ul', 'li', 'button', 'nav'];
+const tags = ['div', 'span', 'ul', 'li', 'button', 'nav', 'img'];
 const entries = tags.map((tagName) => [tagName, elementCreator(tagName)]);
 const T = Object.fromEntries(entries);
 export default T;

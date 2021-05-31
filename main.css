@@ -20,24 +20,73 @@ body {
 .test-taker-details__field-name {
   color: gray;
 }
+.test-taker-details__last-name, .test-taker-details__first-name {
+  text-transform: capitalize;
+}
 
+@keyframes side {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(500%);
+  }
+}
+.test-taker-preview {
+  display: grid;
+  grid-row-gap: 5px;
+  grid-column-gap: 20px;
+  grid-template-areas: "picture name" "picture id" "details details";
+  grid-template-columns: 100px 1fr;
+}
+.test-taker-preview__picture {
+  grid-area: picture;
+  width: 100px;
+  height: 100px;
+  clip-path: circle();
+  font-size: 50px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+.test-taker-preview__picture img {
+  max-width: 100%;
+}
 .test-taker-preview__id {
+  grid-area: id;
   color: gray;
   font-size: 20px;
 }
 .test-taker-preview__id:before {
   content: "#";
 }
-.test-taker-preview__first-name, .test-taker-preview__last-name {
+.test-taker-preview__name, .test-taker-preview__name {
+  grid-area: name;
   font-size: 36px;
   text-transform: capitalize;
   display: inline-block;
 }
-.test-taker-preview__first-name {
-  margin-right: 5px;
+.test-taker-preview__details {
+  grid-area: details;
 }
 .test-taker-preview__details-box_hidden {
   display: none;
+}
+.test-taker-preview__details-box[data-loaded=false]:after {
+  content: "";
+  display: block;
+  background-color: var(--accent-color);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation-name: side;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
 }
 .test-taker-preview__show-details {
   border: 0px;
@@ -71,7 +120,7 @@ body {
 .list__item {
   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;
-  padding: 15px;
+  padding: 20px;
   border-radius: var(--radius);
   list-style-type: none;
 }
