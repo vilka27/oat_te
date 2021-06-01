@@ -32,3 +32,15 @@ Page component fetches data from specified url, renders pagination and renders l
 Test-taker-details component simply renders provided data.
 
 Test-taker-preview component accepts data needed to display preview, fetches data from specified url, accept optional mapping function to convert response data to test-taker-deatils data.
+
+# Used technologies & tools
+
+Sass CSS preprocessor
+
+Css class naming convention [BEM](https://en.bem.info)
+
+ESlint
+
+[http-server](https://www.npmjs.com/package/http-server) to run project locally
+
+VSCode
