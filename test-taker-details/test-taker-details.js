@@ -1,4 +1,4 @@
-import T from '../T.js';
+import T from '../utils/T.js';
 
 /**
  *

@@ -91,7 +91,8 @@ body {
   display: none;
 }
 .test-taker-preview__details-box[data-loaded=false]:after {
-  content: "";
+  content: "loading";
+  font-size: 0;
   display: block;
   background-color: var(--accent-color);
   width: 10px;
@@ -159,6 +160,31 @@ body {
   color: white;
   flex: 1;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.page__prev:focus, .page__next:focus {
+  outline: 3px solid black;
+}
+.page__prev:before {
+  content: "";
+  display: block;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(45deg);
+  width: 6px;
+  height: 6px;
+  margin-right: 5px;
+}
+.page__next:after {
+  content: "";
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-135deg);
+  width: 6px;
+  height: 6px;
+  margin-left: 5px;
 }
 
 /*# sourceMappingURL=main.css.map */

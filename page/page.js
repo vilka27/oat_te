@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import list from '../list/list.js';
 import fetchData from '../utils/fetchData.js';
-import T from '../T.js';
+import T from '../utils/T.js';
 /**
  *
  * @param {String} usersUrl
@@ -33,12 +33,12 @@ export default function page(
    */
   function pageInner(listData) {
     const prevButton = offset >= perPage ? T.button({ class: 'page__prev' }, [
-      '< Previous',
+      'Previous',
     ], { click: loadPrev }) : null;
 
     const showNext = totalItems === undefined || offset + perPage < totalItems;
     const nextButton = showNext ? T.button({ class: 'page__next' }, [
-      'Next >',
+      'Next',
     ], { click: loadNext }) : null;
 
     return T.div({ class: 'page' }, [
@@ -50,7 +50,9 @@ export default function page(
     ]);
   }
 
-  const resultElement = T.div({}, [
+  const resultElement = T.div({
+    'aria-live': 'polite',
+  }, [
     pageInner([]),
   ]);
 

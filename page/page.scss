@@ -15,5 +15,35 @@
         color: white;
         flex: 1;
         cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        &:focus {
+            outline: 3px solid black;
+        }
+    }
+    &__prev{
+        &:before{
+            content: "";
+            display: block;
+            border-left: 2px solid white;
+            border-bottom: 2px solid white;
+            transform: rotate(45deg);
+            width: 6px;
+            height: 6px;
+            margin-right: 5px;
+        }
+    }
+    &__next{
+        &:after{
+            content: "";
+            border-left: 2px solid white;
+            border-bottom: 2px solid white;
+            transform: rotate(-135deg);
+            width: 6px;
+            height: 6px;
+            margin-left: 5px;
+        }
     }
 }

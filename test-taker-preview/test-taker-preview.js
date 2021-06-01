@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import T from '../T.js';
+import T from '../utils/T.js';
 import testTakerDetails from '../test-taker-details/test-taker-details.js';
 import fetchData from '../utils/fetchData.js';
 import colorHash from '../utils/colorHash.js';
@@ -64,11 +64,23 @@ function loadDetails(userId, detailsBox, url, responseToModel = (r) => r, pictur
  * @param {Function} responseToModel
  * @returns {Element}
  */
+
 function testTakerPreview(data, url, responseToModel) {
-  const pictureBox = T.div({ class: 'test-taker-preview__picture', style: `background-color:${colorHash(data.lastName)}` }, [data.firstName[0], data.lastName[0]]);
-  const detailsBox = T.div({ class: 'test-taker-preview__details-box test-taker-preview__details-box_hidden', 'data-loaded': 'false' });
+  const pictureBox = T.div({
+    class: 'test-taker-preview__picture',
+    style: `background-color:${colorHash(data.lastName)}`,
+    'aria-hidden': 'true',
+  }, [
+    data.firstName[0],
+    data.lastName[0],
+  ]);
+  const detailsBox = T.div({
+    class: 'test-taker-preview__details-box test-taker-preview__details-box_hidden',
+    'data-loaded': 'false',
+    'aria-live': 'polite',
+  });
   const box = T.div({ class: 'test-taker-preview__details' }, [
-    T.button({ class: 'test-taker-preview__show-details' }, [], {
+    T.button({ class: 'test-taker-preview__show-details', 'aria-label': 'show details' }, [], {
       click: (event) => {
         if (detailsBox.dataset && detailsBox.dataset.loaded === 'false') {
           loadDetails(data.userId, detailsBox, url, responseToModel, pictureBox);

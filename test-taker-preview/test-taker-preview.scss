@@ -57,7 +57,8 @@
         }
 
         &[data-loaded="false"]:after{
-            content: "";
+            content: "loading";
+            font-size: 0;
             display: block;
             background-color: var(--accent-color);
             width: 10px;
