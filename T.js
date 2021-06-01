@@ -11,7 +11,7 @@ function isNode(obj) {
    *
    * @param {String} tagName
    * @param {Object} attributes
-   * @param {Array<Element>} children
+   * @param {Array<Element|String|null>} children
    * @param {Object} eventListeners
    * @returns {Element}
    */
@@ -53,7 +53,7 @@ function elementCreator(tag) {
   /**
    *
    * @param {Object} attributes
-   * @param {Array<Element>} children
+   * @param {Array<Element|String|null>} children
    * @param {Object} eventListeners
    */
   function createTagElement(attributes, children, eventListeners) {
